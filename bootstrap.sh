@@ -5,7 +5,6 @@ email="16viko@gmail.com"
 
 # Before running this script:
 # sudo chown -R ${whoami} /usr/local
-whoami
 
 # make in case they aren't already there
 mkdir -p "/usr/local/lib"
@@ -19,9 +18,11 @@ if test ! $(which brew); then
 fi
 
 # Update homebrew recipes
+echo "Updating brew..."
 brew update
 
 # Install and use latest zsh
+echo "Installing zsh and oh-my-zsh..."
 brew install zsh
 
 # Install oh-my-zsh
@@ -42,6 +43,8 @@ git config --global user.email $email
 # Install nvm
 echo "Installing nvm..."
 curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+source ~/.zshrc
+
 nvm install stable
 nvm alias default stable
 
@@ -75,7 +78,6 @@ npm install -g ${modules[@]}
 echo "Intstalling apps from Brew..."
 
 formulae=(
-  android-platform-tools
   git-extras
   aria2
   jq
@@ -89,7 +91,7 @@ brew install ${formulae[@]}
 
 # Install Brew Cask
 echo "Installing brew cask..."
-brew install caskroom/cask/brew-cask
+brew tap caskroom/cask
 
 # Apps
 apps=(
@@ -99,12 +101,12 @@ apps=(
   sublime-text
   visual-studio-code
   sourcetree
+  android-platform-tools
   mounty
   qlmarkdown
   qlimagesize
   webpquicklook
   shiftit
-  baiduinput
   typora
   xmind
   kaleidoscope
@@ -116,7 +118,6 @@ apps=(
   telegram-desktop
   shadowsocksx
   launchbar
-  xmind
   charles
 )
 
@@ -132,8 +133,19 @@ brew cask install --appdir="/Applications" ${apps[@]}
 mkdir ~/Personal
 mkdir ~/Work
 
-ls ~
 
-# Source dot files
-# echo '. ~/.dotfiles/bash/.profile' >> ~/.profile
-source ~/.profile
+echo "最后检查 ~"
+ls -a ~
+
+echo "最后检查 node"
+node -v
+npm -v
+
+echo "最后检查 npm"
+npm ls -g --depth=0
+
+echo "最后检查 brew"
+brew list
+
+echo "最后检查 brew cask"
+brew cask list
