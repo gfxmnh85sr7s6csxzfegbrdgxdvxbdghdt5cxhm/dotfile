@@ -5,6 +5,7 @@ email="16viko@gmail.com"
 
 # Before running this script:
 # sudo chown -R ${whoami} /usr/local
+whoami
 
 # make in case they aren't already there
 mkdir -p "/usr/local/lib"
